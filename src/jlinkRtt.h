@@ -27,6 +27,35 @@
 
 #include <stdint.h>
 
+#ifndef DEBUGCOLORS
+#define DEBUGCOLORS
+enum jlinkRTT__dbgColors
+{
+    dbgColor__none = 13,
+    dbgColor__dflt = 13,
+    dbgColor__info = 15,
+    dbgColor__warn = 17,
+    dbgColor__error = 16,
+
+    dbgColor__cyan = 10,
+    dbgColor__magenta = 11,
+    dbgColor__white = 12,
+    dbgColor__gray = 13,
+    dbgColor__blue = 14,
+    dbgColor__green = 15,
+    dbgColor__red = 16,
+    dbgColor__yellow = 17,
+
+    dbgColor__dCyan = 20,
+    dbgColor__dMagenta = 21,
+    dbgColor__dBlue = 24,
+    dbgColor__dGreen = 25,
+    dbgColor__dRed = 26,
+    dbgColor__dYellow = 27
+};
+#endif
+
+
 #ifndef DBCCOLOR_none
 #define DBGCOLOR_none 13
 #define DBGCOLOR_dflt 13
@@ -52,7 +81,7 @@
 #endif
 
 #ifdef _DEBUG
-    #define PRINTF(c_, f_, ...) rtt_printf(c_, (f_), ##__VA_ARGS__)
+    #define PRINTF(c_, f_, ...) do { rtt_printf(c_, (f_), ##__VA_ARGS__); } while(0)
 #endif
 
 #ifdef __cplusplus
