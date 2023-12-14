@@ -25,79 +25,75 @@
 #ifndef __JLINKRTT_H__
 #define __JLINKRTT_H__
 
+#ifdef _TERMINAL
+    #undef _TERMINAL
+#endif
+#define _TERMINAL 1
+#define LOG_RTT
+#define DIAGPRINT_RTT               // LEGACY: remove in future version
+
+
+#ifndef PRNT_DEFAULT                // PRNT_ constants will be deprecated when DPRINT() and DPRINT_V() macros are eliminated
+    #define PRNT_DEFAULT 13
+    #define PRNT_INFO 12
+    #define PRNT_WARN 17
+    #define PRNT_ERROR 16
+
+    #define PRNT_CYAN 10
+    #define PRNT_MAGENTA 11
+    #define PRNT_WHITE 12
+    #define PRNT_GRAY 13
+    #define PRNT_BLUE 14
+    #define PRNT_GREEN 15
+    #define PRNT_RED 16
+    #define PRNT_YELLOW 17
+
+    #define PRNT_dCYAN 20
+    #define PRNT_dMAGENTA 21
+    #define PRNT_dBLUE 24
+    #define PRNT_dGREEN 25
+    #define PRNT_dRED 26
+    #define PRNT_dYELLOW 27
+#endif
+
+#ifndef logDEFAULT
+    #define logDEFAULT 13
+    #define logINFO 12
+    #define logWARN 17
+    #define logERROR 16
+
+    #define logCYAN 10
+    #define logMAGENTA 11
+    #define logWHITE 12
+    #define logGRAY 13
+    #define logBLUE 14
+    #define logGREEN 15
+    #define logRED 16
+    #define logYELLOW 17
+
+    #define logDARKCYAN 20
+    #define logDARKMAGENTA 21
+    #define logDARKBLUE 24
+    #define logDARKGREEN 25
+    #define logDARKRED 26
+    #define logDARKYELLOW 27
+#endif
+
+
+#ifndef _LOGGER
 #include <stdint.h>
-
-#ifndef DEBUGCOLORS
-#define DEBUGCOLORS
-enum jlinkRTT__dbgColors
-{
-    dbgColor__none = 13,
-    dbgColor__dflt = 13,
-    dbgColor__info = 15,
-    dbgColor__warn = 17,
-    dbgColor__error = 16,
-
-    dbgColor__cyan = 10,
-    dbgColor__magenta = 11,
-    dbgColor__white = 12,
-    dbgColor__gray = 13,
-    dbgColor__blue = 14,
-    dbgColor__green = 15,
-    dbgColor__red = 16,
-    dbgColor__yellow = 17,
-
-    dbgColor__dCyan = 20,
-    dbgColor__dMagenta = 21,
-    dbgColor__dBlue = 24,
-    dbgColor__dGreen = 25,
-    dbgColor__dRed = 26,
-    dbgColor__dYellow = 27
-};
-#endif
-
-
-#ifndef DBCCOLOR_none
-#define DBGCOLOR_none 13
-#define DBGCOLOR_dflt 13
-#define DBGCOLOR_info 15
-#define DBGCOLOR_warn 17
-#define DBGCOLOR_error 16
-
-#define DBGCOLOR_cyan 10
-#define DBGCOLOR_magenta 11
-#define DBGCOLOR_white 12
-#define DBGCOLOR_gray 13
-#define DBGCOLOR_blue 14
-#define DBGCOLOR_green 15
-#define DBGCOLOR_red 16
-#define DBGCOLOR_yellow 17
-
-#define DBGCOLOR_dCyan 20
-#define DBGCOLOR_dMagenta 21
-#define DBGCOLOR_dBlue 24
-#define DBGCOLOR_dGreen 25
-#define DBGCOLOR_dRed 26
-#define DBGCOLOR_dYellow 27
-#endif
-
-#ifdef _DEBUG
-    #define PRINTF(c_, f_, ...) do { rtt_printf(c_, (f_), ##__VA_ARGS__); } while(0)
-#endif
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif // __cplusplus
 
-
-// include this pure C header inside __cplusplus block
-#include <SEGGER_RTT.h> 
-
-void rtt_printf(uint8_t color, const char *fmt, ...);
-
+void log_printf(uint8_t color, const char *fmt, ...);
 
 #ifdef __cplusplus
 }
 #endif // __cplusplus
 
-#endif  /* !__JLINKRTT_H__ */
+#endif // not defined(_LOGGER)
+
+#endif // !__JLINKRTT_H__ 

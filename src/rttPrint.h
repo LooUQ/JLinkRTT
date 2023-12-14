@@ -28,26 +28,6 @@
 #include <stdio.h>
 #include <Print.h>
 
-// typedef enum rttColor_tag {
-//     rttColor_none = 0,
-//     rttColor_info = 1,
-//     rttColor_warn = 2,
-//     rttColor_error = 3,
-
-//     rttColor_cyan = 10,
-//     rttColor_magenta = 11,
-//     rttColor_white = 12,
-//     rttColor_gray = 13,
-//     rttColor_blue = 14,
-
-//     rttColor_dCyan = 20,
-//     rttColor_dMagenta = 21,
-
-//     rttColor_green = 1,
-//     rttColor_dGreen = 25
-// } rttColor_t;
-
-
 
 class rttPrint : public Print
 {

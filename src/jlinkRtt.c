@@ -1,10 +1,12 @@
 
 #include <stdarg.h>
 #include <stdint.h>
+#include <stdio.h>
+
 #include "jlinkRtt.h"
+#include "SEGGER_RTT.h"                 // NOTE: this is the "C" header from SEGGER unaltered. There is no #ifdef for prior header definition or __cplusplus
 
-
-void rtt_printf(uint8_t color, const char *fmt, ...)
+void log_printf(uint8_t color, const char *fmt, ...)
 {
     // asm(".global _printf_float");
 
@@ -14,54 +16,54 @@ void rtt_printf(uint8_t color, const char *fmt, ...)
     vsnprintf(buf, sizeof(buf), fmt, args);
     va_end(args);
 
-    /* Using RTT BufferIndex (tab) 0 only
+    /* Using RTT viewer tab 0 only (BufferIndex)
      *
      * translates to:  int SEGGER_RTT_vprintf(unsigned BufferIndex, const char * sFormat, va_list * paramList);
      */
 
     switch (color)
     {
-        case DBGCOLOR_cyan:
+        case PRNT_CYAN:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_CYAN);
             break;
-        case DBGCOLOR_magenta:
+        case PRNT_MAGENTA:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_MAGENTA);
             break;
-        case DBGCOLOR_white:
+        case PRNT_WHITE:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_WHITE);
             break;
-        case DBGCOLOR_gray:
+        case PRNT_GRAY:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_BLACK);
             break;
-        case DBGCOLOR_blue:
+        case PRNT_BLUE:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_BLUE);
             break;
-        case DBGCOLOR_green:
+        case PRNT_GREEN:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_GREEN);
             break;
-        case DBGCOLOR_red:
+        case PRNT_RED:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_RED);
             break;
-        case DBGCOLOR_yellow:
+        case PRNT_YELLOW:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BRIGHT_YELLOW);
             break;
             
-        case DBGCOLOR_dCyan:
+        case PRNT_dCYAN:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_CYAN);
             break;
-        case DBGCOLOR_dMagenta:
+        case PRNT_dMAGENTA:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_MAGENTA);
             break;
-        case DBGCOLOR_dBlue:
+        case PRNT_dBLUE:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_BLUE);
             break;
-        case DBGCOLOR_dGreen:
+        case PRNT_dGREEN:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_GREEN);
             break;
-        case DBGCOLOR_dRed:
+        case PRNT_dRED:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
             break;
-        case DBGCOLOR_dYellow:
+        case PRNT_dYELLOW:
             SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_YELLOW);
             break;
 
